@@ -1,0 +1,80 @@
+﻿@model Gazdik.Models.Kereses
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form>
+    <div class="row">
+        <div class="form-floating mb-3 col-md-6">
+            <input asp-for="IdKeres" class="form-control" id="floatingInput" placeholder="GazdiId">
+            <label asp-for="IdKeres" class="ms-1">GazdiId</label>
+        </div>
+        <div class="form-floating mb-3 col-md-6">
+            <select class="form-select" id="floatingSelect" aria-label="Kategória" asp-for="NevKeres" asp-items="Model.NevLista">
+                <option value="">Összes kategória</option>
+            </select>
+            <label for="floatingSelect">Kategória</label>
+        </div>
+        <div class="row justify-content-between m-0">
+            <button type="submit" class="btn btn-success shadow-lg mb-3 col-md-5">Search</button>
+            <button asp-action="create" class="btn btn-success shadow-lg mb-3 col-md-5">Create new</button>
+        </div>
+    </div>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GazdiLista[0].GazdiId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GazdiLista[0].Nev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GazdiLista[0].Cim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GazdiLista[0].Telefonszam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GazdiLista[0].Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.GazdiLista) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GazdiId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nev)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefonszam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
